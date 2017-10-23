@@ -1,6 +1,6 @@
 # terraform-example
 > Author: Abdelaziz Khajour
-> This project sample show how to use main Terraform feature on aws provider
+> This e example shows how to use main Terraform features on aws provider
 
 
 ## Dependencies
@@ -10,7 +10,7 @@ You need the following tools to run this example:
 * git
 * aws cli
 
-## setup
+## Setup
 
 ```sh
 aws configure
@@ -19,7 +19,7 @@ mkdir projects/terraform
 git clone https://github.com/khajour/terraform-example.git
 ```
 
-## run the example
+## Run the example
 edit the main.tf file if necessary
 
 ```sh
