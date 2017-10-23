@@ -17,6 +17,7 @@ aws configure
 cd
 mkdir projects/terraform
 git clone https://github.com/khajour/terraform-example.git
+cd terraform-example
 ```
 
 ## Run the example
