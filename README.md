@@ -1,6 +1,6 @@
 # terraform-example
 > Author: Abdelaziz Khajour
-> This e example shows how to use main Terraform features on aws provider
+> This example shows how to use main Terraform features on aws provider
 
 
 ## Dependencies
@@ -25,6 +25,7 @@ edit the main.tf file if necessary
 
 ```sh
 vim main.tf  
+terraform fmt
 terraform plan
 terraform validate
 terraform apply

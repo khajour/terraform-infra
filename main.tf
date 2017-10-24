@@ -2,17 +2,14 @@
 // Providers
 // ------------------------------------------------------
 provider "aws" {
-  region     = "eu-west-1"
+  region = "eu-west-1"
 }
 
-
-
 // ------------------------------------------------------
 // ------------------------------------------------------
-
 
 resource "aws_internet_gateway" "igw" {
-    vpc_id = "${aws_vpc.terraform.id}"
+  vpc_id = "${aws_vpc.terraform.id}"
 }
 
 // ------------------------------------------------------
@@ -20,28 +17,27 @@ resource "aws_internet_gateway" "igw" {
 // ------------------------------------------------------
 
 resource "aws_vpc" "terraform" {
-  cidr_block       = "172.23.0.0/16"
-
+  cidr_block = "172.23.0.0/16"
 
   tags {
     Name = "terraform_vpc"
   }
 }
+
 //=====
 
 resource "aws_subnet" "public_subnet_1" {
-  vpc_id     = "${aws_vpc.terraform.id}"
-  cidr_block = "172.23.1.0/24"
+  vpc_id                  = "${aws_vpc.terraform.id}"
+  cidr_block              = "172.23.1.0/24"
   map_public_ip_on_launch = true
   availability_zone       = "eu-west-1a"
-
 
   tags {
     Name = "public_subnet_1"
   }
 }
-//=====
 
+//=====
 
 resource "aws_subnet" "public_subnet_2" {
   vpc_id                  = "${aws_vpc.terraform.id}"
@@ -67,9 +63,9 @@ resource "aws_route_table" "public_route_table" {
 //=====
 
 resource "aws_route" "public_route" {
-  route_table_id            =  "${aws_route_table.public_route_table.id}"
-  destination_cidr_block    = "0.0.0.0/0"
-  gateway_id = "${aws_internet_gateway.igw.id}"
+  route_table_id         = "${aws_route_table.public_route_table.id}"
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = "${aws_internet_gateway.igw.id}"
 }
 
 //=====
