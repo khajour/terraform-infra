@@ -24,7 +24,7 @@ cd terraform-example
 edit the main.tf file if necessary
 
 ```sh
-vim main.tf  
+vi main.tf  
 terraform fmt
 terraform plan
 terraform validate
@@ -34,4 +34,11 @@ terraform apply
 ## Remove the created resources
 ```sh
 terraform destroy
+```
+
+## Other usefull commands
+
+```ssh
+terraform fmt
+terraform show
 ```

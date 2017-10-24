@@ -5,12 +5,36 @@ provider "aws" {
   region = "eu-west-1"
 }
 
+
+// ------------------------------------------------------
+// Terraform Remote State on S3
+// ------------------------------------------------------
+
+terraform {
+  backend "s3" {
+    bucket = "khajour-s3"
+    key = "vpc/terraform.tfstate"
+    region = "eu-west-1"
+  }
+}
+
+data "terraform_remote_state" "rs-vpc" {
+  backend = "s3"
+  config = {
+    region = "eu-west-1"
+    bucket = "khajour-s3"
+    key = "vpc/terraform.tfstate"
+  }
+}
+
 // ------------------------------------------------------
 // ------------------------------------------------------
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = "${aws_vpc.terraform.id}"
 }
+
+
 
 // ------------------------------------------------------
 // Network
@@ -23,6 +47,10 @@ resource "aws_vpc" "terraform" {
     Name = "terraform_vpc"
   }
 }
+
+
+
+
 
 //=====
 
@@ -80,18 +108,4 @@ resource "aws_route_table_association" "rt_association_1" {
 resource "aws_route_table_association" "rt_association_2" {
   subnet_id      = "${aws_subnet.public_subnet_2.id}"
   route_table_id = "${aws_route_table.public_route_table.id}"
-}
-
-// ------------------------------------------------------
-// EC2 Instances
-// ------------------------------------------------------
-
-resource "aws_instance" "web" {
-  ami           = "ami-acd005d5"
-  instance_type = "t2.micro"
-  subnet_id     = "${aws_subnet.public_subnet_1.id}"
-
-  tags {
-    Name = "HelloWorld Terraform"
-  }
 }
